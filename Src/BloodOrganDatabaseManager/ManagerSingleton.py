@@ -5,8 +5,8 @@ from PyQt5.QtCore import pyqtSlot, QObject
 
 
 # View imports
-from BloodOrganDatabaseManager.Views.LoginView import LoginView
-from BloodOrganDatabaseManager.Views.MainWindowView import MainWindowView
+from BloodOrganDatabaseManager.Views.Login.LoginView import LoginView
+from BloodOrganDatabaseManager.Views.MainWindow.MainWindowView import MainWindowView
 
 # Common Imports
 from BloodOrganDatabaseManager.Common.CommonDefinitions import CREDENTIALS_MAP_USER_KEY, CREDENTIALS_MAP_PASS_KEY, DB_HOST, DB_NAME, DB_PORT
