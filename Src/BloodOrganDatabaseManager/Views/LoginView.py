@@ -7,9 +7,7 @@ from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
 from PyQt5 import QtWidgets
 
 from BloodOrganDatabaseManager.Views.UI.BloodOrganDatabaseManagerLoginGenerated import Ui_BloodOrganDatabaseManagerLogin
-
-CREDENTIALS_MAP_USER_KEY = "user"
-CREDENTIALS_MAP_PASS_KEY = "pass"
+from BloodOrganDatabaseManager.Common.CommonDefinitions import CREDENTIALS_MAP_USER_KEY, CREDENTIALS_MAP_PASS_KEY
 
 
 class LoginView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerLogin, QObject):
@@ -38,8 +36,6 @@ class LoginView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerLogin, QObjec
 
       username = self.user_line_edit.text()
       password = self.pass_line_edit.text()
-
-      print(f"{username}: {password}")
 
       if username and password:
 
