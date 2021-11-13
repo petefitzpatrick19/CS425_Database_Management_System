@@ -315,3 +315,200 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          return False
 
       return True
+
+
+   # --Organ Donor----------------------------------------------------------
+
+   def add_organ_donor(self):
+      """
+      This method is a slot which takes the user inputs and adds a Organ Donor entry to the table
+      """
+
+      organ_donor_id = self.organ_donor_id_spin_box.text()
+      name = self.organ_donor_name_line_edit.text()
+      age = self.organ_donor_age_spin_box.text()
+      blood_type = self.orga_donor_blood_type_line_edit.text() # TODO
+      drug_use = self.organ_donor_drug_use_line_edit.text()
+      last_tattoo_date = self.organ_donor_last_tattoo_date_line_edit.text()
+      region = self.organ_donor_region_line_edit.text()
+      organ_name = self.organ_donor_organ_name_line_edit.text()
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         insert_command = f"INSERT INTO Organ_Donor (organ_donor_id, name, age, blood_type, drug_use, last_tattoo_date, region, organ_name) VALUES ({organ_donor_id}, '{name}', {age}, '{blood_type}', '{drug_use}', '{last_tattoo_date}', '{region}', '{organ_name}')"
+
+         cursor.execute(insert_command)
+
+         self.__conn.commit()
+
+      except Exception as e:
+         print(e)
+         return False
+
+      self.update_organ_donor_table()
+      return True
+
+
+   def remove_organ_donor(self):
+      """
+      This method is a slot which which removes the selected Organ Donor entry from the table
+      """
+
+      row = self.organ_donor_table.currentRow()
+      if not row:
+         return False
+
+      organ_donor_id = self.organ_donor_table.item(row,0).text()
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         delete_command = f"DELETE FROM Organ_Donor WHERE organ_donor_id = {organ_donor_id}"
+
+         cursor.execute(delete_command)
+
+         self.__conn.commit()
+
+      except Exception as e:
+         print(e)
+         return False
+
+      self.update_organ_donor_table()
+      return True
+
+
+   def update_organ_donor_table(self):
+      """
+      This method updates the Organ Donor table to match the current status of the database
+      """
+      try:
+
+         cursor = self.__conn.cursor()
+
+         select_command = "SELECT * FROM Organ_Donor"
+
+         cursor.execute(select_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+         self.organ_donor_table.setRowCount(0)
+
+         for data in rows:
+            idx = rows.index(data)
+            self.organ_donor_table.insertRow(idx)
+            self.organ_donor_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+            self.organ_donor_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+            self.organ_donor_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
+            self.organ_donor_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
+            self.organ_donor_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
+            self.organ_donor_table.setItem(idx,5,QtWidgets.QTableWidgetItem(str(data[5])))
+            self.organ_donor_table.setItem(idx,6,QtWidgets.QTableWidgetItem(str(data[6])))
+            self.organ_donor_table.setItem(idx,7,QtWidgets.QTableWidgetItem(str(data[7])))
+
+      except Exception as e:
+         print(e)
+         return False
+
+      return True
+
+
+   # --Blood Donor----------------------------------------------------------
+
+   def add_blood_donor(self):
+      """
+      This method is a slot which takes the user inputs and adds a Blood Donor entry to the table
+      """
+      blood_donor_id = self.blood_donor_id_spin_box.text()
+      name = self.blood_donor_name_line_edit.text()
+      age = self.blood_donor_age_spin_box.text()
+      blood_type = self.blood_donor_blood_type_line_edit.text() # TODO
+      drug_use = self.patient_need_line_edit.text()
+      last_tattoo_date = self.blood_donor_last_tattoo_date_line_edit.text()
+      region = self.blood_donor_region_line_edit.text()
+      last_donation = self.blood_donor_last_donation_line_edit.text()
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         insert_command = f"INSERT INTO Blood_Donor (blood_donor_id, name, age, blood_type, drug_use, last_tattoo_date, region, last_donation) VALUES ({blood_donor_id}, '{name}', {age}, '{blood_type}', '{last_tattoo_date}', '{region}', '{last_donation}')"
+
+         cursor.execute(insert_command)
+
+         self.__conn.commit()
+
+      except Exception as e:
+         print(e)
+         return False
+
+      self.update_blood_donor_table()
+      return True
+
+
+   def remove_blood_donor(self):
+      """
+      This method is a slot which which removes the selected Blood Donor entry from the table
+      """
+
+      row = self.blood_donor_table.currentRow()
+      if not row:
+         return False
+
+      blood_donor_id = self.blood_donor_table.item(row,0).text()
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         delete_command = f"DELETE FROM Blood_Donor WHERE blood_donor_id = {blood_donor_id}"
+
+         cursor.execute(delete_command)
+
+         self.__conn.commit()
+
+      except Exception as e:
+         print(e)
+         return False
+
+      self.update_blood_donor_table()
+      return True
+
+
+   def update_blood_donor_table(self):
+      """
+      This method updates the Blood Donor table to match the current status of the database
+      """
+      try:
+
+         cursor = self.__conn.cursor()
+
+         select_command = "SELECT * FROM Blood_Donor"
+
+         cursor.execute(select_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+         self.blood_donor_table.setRowCount(0)
+
+         for data in rows:
+            idx = rows.index(data)
+            self.blood_donor_table.insertRow(idx)
+            self.blood_donor_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+            self.blood_donor_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+            self.blood_donor_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
+            self.blood_donor_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
+            self.blood_donor_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
+            self.blood_donor_table.setItem(idx,5,QtWidgets.QTableWidgetItem(str(data[5])))
+            self.blood_donor_table.setItem(idx,6,QtWidgets.QTableWidgetItem(str(data[6])))
+            self.blood_donor_table.setItem(idx,7,QtWidgets.QTableWidgetItem(str(data[7])))
+
+      except Exception as e:
+         print(e)
+         return False
+
+      return True
