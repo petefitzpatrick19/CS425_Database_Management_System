@@ -1,1 +1,3 @@
 *.pyc
+.DS_Store
+Src/BloodOrganDatabaseManager/__pycache__/ManagerSingleton.cpython-37.pyc

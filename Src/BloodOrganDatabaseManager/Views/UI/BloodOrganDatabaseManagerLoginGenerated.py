@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\fitzpap\Documents\BloodOrganDatabase\Src\BloodOrganDatabaseManager\Views\UI\BloodOrganDatabaseManagerLoginGenerated.ui'
+# Form implementation generated from reading ui file '/Users/pete/Documents/GitHub/CS425_Database_Management_System/Src/BloodOrganDatabaseManager/Views/UI/BloodOrganDatabaseManagerLoginGenerated.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -29,6 +29,7 @@ class Ui_BloodOrganDatabaseManagerLogin(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pass_line_edit.setFont(font)
+        self.pass_line_edit.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.pass_line_edit.setObjectName("pass_line_edit")
         self.gridLayout.addWidget(self.pass_line_edit, 3, 1, 1, 1)
         self.user_line_edit = QtWidgets.QLineEdit(self.centralwidget)
@@ -90,6 +91,7 @@ class Ui_BloodOrganDatabaseManagerLogin(object):
         BloodOrganDatabaseManagerLogin.setWindowTitle(_translate("BloodOrganDatabaseManagerLogin", "MainWindow"))
         self.pass_lbl.setText(_translate("BloodOrganDatabaseManagerLogin", "Password:"))
         self.enter_btn.setText(_translate("BloodOrganDatabaseManagerLogin", "Enter"))
+        self.enter_btn.setShortcut(_translate("BloodOrganDatabaseManagerLogin", "Return"))
         self.user_lbl.setText(_translate("BloodOrganDatabaseManagerLogin", "Username:"))
         self.login_lbl.setText(_translate("BloodOrganDatabaseManagerLogin", "Login:"))
         self.main_lbl.setText(_translate("BloodOrganDatabaseManagerLogin", "Blood and Organ Donation Management System"))

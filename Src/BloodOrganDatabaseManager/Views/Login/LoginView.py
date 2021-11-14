@@ -27,6 +27,10 @@ class LoginView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerLogin, QObjec
 
       self.enter_btn.clicked.connect(self.on_submit_login)
 
+      # TODO: TEMPORARY so I dont have to keep typing the login in
+      self.user_line_edit.setText("pete_admin")
+      self.pass_line_edit.setText("cs425") 
+
 
    @pyqtSlot()
    def on_submit_login(self):
