@@ -38,12 +38,32 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       self.add_organ_donor_push_btn.clicked.connect(self.add_organ_donor)
       self.remove_organ_donor_push_btn.clicked.connect(self.remove_organ_donor)
 
+      self.add_blood_donor_push_btn.clicked.connect(self.add_blood_donor)
+      self.remove_blood_donor_push_btn.clicked.connect(self.remove_blood_donor)
+
+      self.add_organ_push_btn.clicked.connect(self.add_organ)
+      self.remove_organ_push_btn.clicked.connect(self.remove_organ)
+
+      self.add_blood_bag_push_btn.clicked.connect(self.add_blood_bag)
+      self.remove_blood_bag_push_btn.clicked.connect(self.remove_blood_bag)
+
+      self.add_transplant_push_btn.clicked.connect(self.add_transplant)
+      self.remove_transplant_push_btn.clicked.connect(self.remove_transplant)
+
+      self.add_transfusion_push_btn.clicked.connect(self.add_transfusion)
+      self.remove_transfusion_push_btn.clicked.connect(self.remove_transfusion)
+
       # -----------------------------------------------------------------
 
       self.update_hospital_table()
       self.update_doctor_table()
       self.update_patient_table()
       self.update_organ_donor_table()
+      self.update_blood_donor_table()
+      self.update_organ_table()
+      self.update_blood_bag_table()
+      self.update_transplant_table()
+      self.update_transfusion_table()
 
 
    # --Hospital----------------------------------------------------------
@@ -129,6 +149,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.hospital_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
             self.hospital_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
             self.hospital_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
+
+         self.hospital_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
          print(e)
@@ -222,6 +244,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.doctor_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
             self.doctor_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
 
+         self.doctor_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
       except Exception as e:
          print(e)
          return False
@@ -313,6 +337,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.patient_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
             self.patient_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
             self.patient_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
+
+         self.patient_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
          print(e)
@@ -462,6 +488,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             contact_info_list = ", ".join(contact_info_list)
             self.organ_donor_table.setItem(idx,10,QtWidgets.QTableWidgetItem(contact_info_list))
 
+         self.organ_donor_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
       except Exception as e:
          print(e)
          return False
@@ -610,6 +638,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             contact_info_list = ", ".join(contact_info_list)
             self.blood_donor_table.setItem(idx,10,QtWidgets.QTableWidgetItem(contact_info_list))
 
+         self.blood_donor_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
       except Exception as e:
          print(e)
          return False
@@ -696,6 +726,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.blood_bag_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
             self.blood_bag_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
 
+         self.blood_bag_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
       except Exception as e:
          print(e)
          return False
@@ -762,7 +794,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
    def update_organ_table(self):
       """
-      This method updates the Blood Bag table to match the current status of the database
+      This method updates the Organ table to match the current status of the database
       """
       try:
 
@@ -787,6 +819,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.organ_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
             self.organ_table.setItem(idx,5,QtWidgets.QTableWidgetItem(str(data[5])))
 
+         self.organ_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
       except Exception as e:
          print(e)
          return False
@@ -806,7 +840,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       patient_id = self.transplant_patient_id_spin_box.text()
       hospital_id = self.transplant_hospital_id_spin_box.text()
 
-      doctor_ids = self.transplant_doctor_id_spin_box.text().split(",") # TODO: Make this a line edit or make it so we can only have one doctor
+      doctor_ids = self.transplant_doctor_ids_line_edit.text().split(",")
 
       try:
 
@@ -837,7 +871,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       if row is -1:
          return False
 
-      transplant_id = self.organ_table.item(row,0).text()
+      transplant_id = self.transplant_table.item(row,0).text()
 
       try:
 
@@ -861,7 +895,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
    def update_transplant_table(self):
       """
-      This method updates the Blood Bag table to match the current status of the database
+      This method updates the Transfusion table to match the current status of the database
       """
       try:
 
@@ -894,9 +928,103 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             doctor_ids = ", ".join(doctor_ids)
             self.transplant_table.setItem(idx,6,QtWidgets.QTableWidgetItem(doctor_ids))
 
+         self.transplant_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
       except Exception as e:
          print(e)
          return False
 
       return True
       
+
+   # --Transfusion-------------------------------------------------------
+
+   def add_transfusion(self):
+      """
+      This method is a slot which takes the user inputs and adds a Transfusion entry to the table
+      """
+      transfusion_id = self.transfusion_id_spin_box.text()
+      status = self.transfusion_status_line_edit.text()
+      blood_donor_id = self.transfusion_blood_donor_id_spin_box.text()
+      doctor_id = self.transfusion_doctor_id_spin_box.text()
+      patient_id = self.transfusion_patient_id_spin_box.text()
+      hospital_id = self.transfusion_hospital_id_spin_box.text()
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         insert_command = f"INSERT INTO Transfusion (tf_id, organ, status, organ_donor_id, patient_id, hospital_id) VALUES ({transfusion_id}, '{status}', {blood_donor_id}, {doctor_id}, {patient_id}, {hospital_id})"
+         cursor.execute(insert_command)
+
+         self.__conn.commit()
+
+      except Exception as e:
+         print(e)
+         return False
+
+      self.update_transfusion_table()
+      return True
+
+
+   def remove_transfusion(self):
+      """
+      This method is a slot which which removes the selected Transfusion entry from the table
+      """
+      row = self.transfusion_table.currentRow()
+      if row is -1:
+         return False
+
+      transfusion_id = self.transfusion_table.item(row,0).text()
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         delete_command = f"DELETE FROM Transfusion WHERE tf_id = {transfusion_id}"
+         cursor.execute(delete_command)
+
+         self.__conn.commit()
+
+      except Exception as e:
+         print(e)
+         return False
+
+      self.update_transfusion_table()
+      return True
+
+
+   def update_transfusion_table(self):
+      """
+      This method updates the Transfusion table to match the current status of the database
+      """
+      try:
+
+         cursor = self.__conn.cursor()
+
+         select_command = "SELECT * FROM Transfusion"
+         cursor.execute(select_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+         self.transfusion_table.setRowCount(0)
+
+         for data in rows:
+            idx = rows.index(data)
+            self.transfusion_table.insertRow(idx)
+            self.transfusion_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+            self.transfusion_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+            self.transfusion_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
+            self.transfusion_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
+            self.transfusion_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
+            self.transfusion_table.setItem(idx,5,QtWidgets.QTableWidgetItem(str(data[5])))
+            self.transfusion_table.setItem(idx,6,QtWidgets.QTableWidgetItem(str(data[5])))
+
+         self.transfusion_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+      except Exception as e:
+         print(e)
+         return False
+
+      return True

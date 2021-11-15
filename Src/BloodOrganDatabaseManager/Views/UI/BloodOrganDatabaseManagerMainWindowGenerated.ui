@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>982</width>
+    <width>972</width>
     <height>829</height>
    </rect>
   </property>
@@ -1635,7 +1635,7 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QWidget" name="blood_bag_table" native="true">
+             <widget class="QWidget" name="blood_bag_table_widget" native="true">
               <layout class="QGridLayout" name="gridLayout_53">
                <property name="leftMargin">
                 <number>9</number>
@@ -1663,7 +1663,7 @@
                 </spacer>
                </item>
                <item row="0" column="0">
-                <widget class="QLabel" name="organ_table_lbl_2">
+                <widget class="QLabel" name="blood_bag_table_lbl">
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
@@ -1677,14 +1677,14 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QPushButton" name="remove_organ_push_btn_2">
+                <widget class="QPushButton" name="remove_blood_bag_push_btn">
                  <property name="text">
                   <string>Remove Selected Row</string>
                  </property>
                 </widget>
                </item>
                <item row="1" column="0" colspan="2">
-                <widget class="QTableWidget" name="organ_table_2">
+                <widget class="QTableWidget" name="blood_bag_table">
                  <property name="editTriggers">
                   <set>QAbstractItemView::NoEditTriggers</set>
                  </property>
@@ -1729,34 +1729,10 @@
             <item row="0" column="0">
              <widget class="QWidget" name="add_transplant_widget" native="true">
               <layout class="QGridLayout" name="gridLayout_40">
-               <item row="2" column="1">
-                <widget class="QLineEdit" name="transplant_organ_line_edit"/>
-               </item>
                <item row="6" column="1">
                 <widget class="QSpinBox" name="transplant_patient_id_spin_box">
                  <property name="maximum">
                   <number>2147483647</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QSpinBox" name="transplant_organ_donor_id_spin_box">
-                 <property name="maximum">
-                  <number>2147483647</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QSpinBox" name="transplant_id_spin_box">
-                 <property name="maximum">
-                  <number>2147483647</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="0">
-                <widget class="QLabel" name="transplant_patient_id_lbl">
-                 <property name="text">
-                  <string>Patient ID:</string>
                  </property>
                 </widget>
                </item>
@@ -1767,34 +1743,10 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QLineEdit" name="transplant_status_line_edit"/>
-               </item>
                <item row="2" column="0">
                 <widget class="QLabel" name="transplant_organ_lbl">
                  <property name="text">
                   <string>Organ:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="transplant_organ_donor_id_lbl">
-                 <property name="text">
-                  <string>Organ Donor ID:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="transplant_status_lbl">
-                 <property name="text">
-                  <string>Status:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="transplant_id_lbl">
-                 <property name="text">
-                  <string>Transplant ID:</string>
                  </property>
                 </widget>
                </item>
@@ -1819,7 +1771,34 @@
                  </property>
                 </widget>
                </item>
-               <item row="8" column="1">
+               <item row="1" column="0">
+                <widget class="QLabel" name="transplant_id_lbl">
+                 <property name="text">
+                  <string>Transplant ID:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="transplant_status_lbl">
+                 <property name="text">
+                  <string>Status:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="transplant_organ_line_edit"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QSpinBox" name="transplant_id_spin_box">
+                 <property name="maximum">
+                  <number>2147483647</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="transplant_status_line_edit"/>
+               </item>
+               <item row="9" column="1">
                 <widget class="QWidget" name="widget_6" native="true">
                  <layout class="QGridLayout" name="gridLayout_41">
                   <property name="leftMargin">
@@ -1857,19 +1836,36 @@
                  </layout>
                 </widget>
                </item>
-               <item row="5" column="0">
-                <widget class="QLabel" name="transplant_doctor_id_lbl">
+               <item row="4" column="0">
+                <widget class="QLabel" name="transplant_organ_donor_id_lbl">
                  <property name="text">
-                  <string>Doctor ID:</string>
+                  <string>Organ Donor ID:</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1">
-                <widget class="QSpinBox" name="transplant_doctor_id_spin_box">
+               <item row="4" column="1">
+                <widget class="QSpinBox" name="transplant_organ_donor_id_spin_box">
                  <property name="maximum">
                   <number>2147483647</number>
                  </property>
                 </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="transplant_patient_id_lbl">
+                 <property name="text">
+                  <string>Patient ID:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="0">
+                <widget class="QLabel" name="transplant_doctor_ids_lbl">
+                 <property name="text">
+                  <string>Doctor IDs:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="1">
+                <widget class="QLineEdit" name="transplant_doctor_ids_line_edit"/>
                </item>
               </layout>
              </widget>
@@ -1962,6 +1958,11 @@
                  <column>
                   <property name="text">
                    <string>Hospital ID</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Doctor IDs</string>
                   </property>
                  </column>
                 </widget>
@@ -2070,7 +2071,7 @@
                 </widget>
                </item>
                <item row="4" column="1">
-                <widget class="QSpinBox" name="transfusion_doctor_id_lbl_2">
+                <widget class="QSpinBox" name="transfusion_doctor_id_spin_box">
                  <property name="maximum">
                   <number>2147483647</number>
                  </property>
@@ -2157,7 +2158,7 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QPushButton" name="remove_patient_push_btn_2">
+                <widget class="QPushButton" name="remove_transfusion_push_btn">
                  <property name="text">
                   <string>Remove Selected Row</string>
                  </property>
@@ -2703,7 +2704,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>982</width>
+     <width>972</width>
      <height>21</height>
     </rect>
    </property>
