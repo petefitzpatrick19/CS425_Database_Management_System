@@ -3,6 +3,7 @@
 """Module to contain the LoginView"""
 
 
+import datetime
 from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
 from PyQt5 import QtWidgets
 
@@ -53,6 +54,12 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       self.add_transfusion_push_btn.clicked.connect(self.add_transfusion)
       self.remove_transfusion_push_btn.clicked.connect(self.remove_transfusion)
 
+      self.organ_enter_btn.clicked.connect(self.enter_organ_donor_list_options)
+
+      self.blood_enter_btn.clicked.connect(self.enter_blood_donor_list_options)
+
+      self.donor_match_enter_btn.clicked.connect(self.enter_donor_match_list_options)
+
       # -----------------------------------------------------------------
 
       self.update_hospital_table()
@@ -64,6 +71,20 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       self.update_blood_bag_table()
       self.update_transplant_table()
       self.update_transfusion_table()
+
+      self.update_organ_donor_list_view()
+      self.update_blood_donor_list_view()
+      self.update_donor_match_list_view()
+
+
+   def report_error(self, title, msg):
+      """
+      This method creates a popup box displaying the title and message passed in.
+      """
+      box = QtWidgets.QMessageBox()
+      box.setWindowTitle(title)
+      box.setText(msg)
+      box.exec_()
 
 
    # --Hospital----------------------------------------------------------
@@ -89,7 +110,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Add Hospital Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_hospital_table()
@@ -118,7 +140,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Remove Hospital Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_hospital_table()
@@ -153,7 +176,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.hospital_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
-         print(e)
+         self.report_error("Update Hospital Failure", str(e))
+         self.__conn.rollback()
          return False
 
       return True
@@ -165,7 +189,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       This method is a slot which takes the user inputs and adds a Doctor entry to the table
       """
 
-      doctor_id = self.doctor_id_line_edit.text()
+      doctor_id = self.doctor_id_spin_box.text()
       name = self.doctor_name_line_edit.text()
       age = self.doctor_age_spin_box.text()
       specialization = self.doctor_specialization_line_edit.text()
@@ -182,7 +206,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Add Doctor Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_doctor_table()
@@ -211,7 +236,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Remove Doctor Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_doctor_table()
@@ -247,7 +273,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.doctor_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
-         print(e)
+         self.report_error("Update Doctor Failure", str(e))
+         self.__conn.rollback()
          return False
 
       return True
@@ -264,19 +291,21 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       age = self.patient_age_spin_box.text()
       blood_type = self.patient_blood_type_line_edit.text()
       need = self.patient_need_line_edit.text()
+      region = self.patient_region_line_edit.text()
 
       try:
 
          cursor = self.__conn.cursor()
 
-         insert_command = f"INSERT INTO Patient (patient_id, name, age, blood_type, need) VALUES ({patient_id}, '{name}', {age}, '{blood_type}', '{need}')"
+         insert_command = f"INSERT INTO Patient (patient_id, name, age, blood_type, need, region) VALUES ({patient_id}, '{name}', {age}, '{blood_type}', '{need}', '{region}')"
 
          cursor.execute(insert_command)
 
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Add Patient Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_patient_table()
@@ -305,7 +334,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Remove Patient Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_patient_table()
@@ -337,11 +367,13 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.patient_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
             self.patient_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
             self.patient_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
+            self.patient_table.setItem(idx,5,QtWidgets.QTableWidgetItem(str(data[5])))
 
          self.patient_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
-         print(e)
+         self.report_error("Update Patient Failure", str(e))
+         self.__conn.rollback()
          return False
 
       return True
@@ -366,11 +398,17 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       chronic_diseases_list = self.organ_donor_chronic_diseases_line_edit.text().split(",")
       contact_info_list = self.organ_donor_contact_info_line_edit.text().split(",")
 
+      # Case for last_tattoo_date where the user does not enter anything
+      if not last_tattoo_date:
+         last_tattoo_date = 'null'
+      else:
+         last_tattoo_date = f"'{last_tattoo_date}'"
+
       try:
 
          cursor = self.__conn.cursor()
 
-         insert_command1 = f"INSERT INTO Organ_Donor (organ_donor_id, name, age, blood_type, drug_use, last_tattoo_date, region, organ_name) VALUES ({organ_donor_id}, '{name}', {age}, '{blood_type}', B'{drug_use}', '{last_tattoo_date}', '{region}', '{organ_name}')"
+         insert_command1 = f"INSERT INTO Organ_Donor (organ_donor_id, name, age, blood_type, drug_use, last_tattoo_date, region, organ_name) VALUES ({organ_donor_id}, '{name}', {age}, '{blood_type}', B'{drug_use}', {last_tattoo_date}, '{region}', '{organ_name}')"
          cursor.execute(insert_command1)
 
          for medication in med_history_list:
@@ -388,7 +426,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Add Organ Donor Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_organ_donor_table()
@@ -425,7 +464,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Remove Organ Donor Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_organ_donor_table()
@@ -491,7 +531,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.organ_donor_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
-         print(e)
+         self.report_error("Update Organ Donor Failure", str(e))
+         self.__conn.rollback()
          return False
 
       return True
@@ -507,7 +548,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       name = self.blood_donor_name_line_edit.text()
       age = self.blood_donor_age_spin_box.text()
       blood_type = self.blood_donor_blood_type_line_edit.text()
-      drug_use = self.patient_need_line_edit.text()
+      drug_use = 1 if self.blood_donor_drug_use_check_box.isChecked() else 0
       last_tattoo_date = self.blood_donor_last_tattoo_date_line_edit.text()
       region = self.blood_donor_region_line_edit.text()
       last_donation = self.blood_donor_last_donation_line_edit.text()
@@ -516,29 +557,42 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       chronic_diseases_list = self.blood_donor_chronic_diseases_line_edit.text().split(",")
       contact_info_list = self.blood_donor_contact_info_line_edit.text().split(",")
 
+      # Case for last_tattoo_date where the user does not enter anything
+      if not last_tattoo_date:
+         last_tattoo_date = 'null'
+      else:
+         last_tattoo_date = f"'{last_tattoo_date}'"
+
+      # Case for last_donation where the user does not enter anything
+      if not last_donation:
+         last_donation = 'null'
+      else:
+         last_donation = f"'{last_donation}'"
+
       try:
 
          cursor = self.__conn.cursor()
 
-         insert_command1 = f"INSERT INTO Blood_Donor (blood_donor_id, name, age, blood_type, drug_use, last_tattoo_date, region, last_donation) VALUES ({blood_donor_id}, '{name}', {age}, '{blood_type}', '{last_tattoo_date}', '{region}', '{last_donation}')"
+         insert_command1 = f"INSERT INTO Blood_Donor (blood_donor_id, name, age, blood_type, drug_use, last_tattoo_date, region, last_donation) VALUES ({blood_donor_id}, '{name}', {age}, '{blood_type}', B'{drug_use}', {last_tattoo_date}, '{region}', {last_donation})"
          cursor.execute(insert_command1)
 
          for medication in med_history_list:
-            insert_command2 = f"INSERT INTO BD_Med_Hist (organ_donor_id, med_history) VALUES ({blood_donor_id}, '{medication}')"
+            insert_command2 = f"INSERT INTO BD_Med_Hist (blood_donor_id, med_history) VALUES ({blood_donor_id}, '{medication}')"
             cursor.execute(insert_command2)
 
          for disease in chronic_diseases_list:
-            insert_command3 = f"INSERT INTO BD_Chronic_Disease (organ_donor_id, chronic_disease) VALUES ({blood_donor_id}, '{disease}')"
+            insert_command3 = f"INSERT INTO BD_Chronic_Disease (blood_donor_id, chronic_disease) VALUES ({blood_donor_id}, '{disease}')"
             cursor.execute(insert_command3)
 
          for contact in contact_info_list:
-            insert_command4 = f"INSERT INTO BD_Contact (organ_donor_id, contact) VALUES ({blood_donor_id}, '{contact}')"
+            insert_command4 = f"INSERT INTO BD_Contact (blood_donor_id, contact) VALUES ({blood_donor_id}, '{contact}')"
             cursor.execute(insert_command4)
 
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Add Blood Donor Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_blood_donor_table()
@@ -563,19 +617,20 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          delete_command1 = f"DELETE FROM Blood_Donor WHERE blood_donor_id = {blood_donor_id}"
          cursor.execute(delete_command1)
 
-         delete_command2 = f"DELETE FROM BD_Med_Hist WHERE organ_donor_id = {blood_donor_id}"
+         delete_command2 = f"DELETE FROM BD_Med_Hist WHERE blood_donor_id = {blood_donor_id}"
          cursor.execute(delete_command2)
 
-         delete_command3 = f"DELETE FROM BD_Chronic_Disease WHERE organ_donor_id = {blood_donor_id}"
+         delete_command3 = f"DELETE FROM BD_Chronic_Disease WHERE blood_donor_id = {blood_donor_id}"
          cursor.execute(delete_command3)
 
-         delete_command4 = f"DELETE FROM BD_Contact WHERE organ_donor_id = {blood_donor_id}"
+         delete_command4 = f"DELETE FROM BD_Contact WHERE blood_donor_id = {blood_donor_id}"
          cursor.execute(delete_command4)
 
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Remove Blood Donor Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_blood_donor_table()
@@ -641,7 +696,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.blood_donor_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
-         print(e)
+         self.report_error("Update Blood Donor Failure", str(e))
+         self.__conn.rollback()
          return False
 
       return True
@@ -661,13 +717,14 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
          cursor = self.__conn.cursor()
 
-         insert_command = f"INSERT INTO Blood_Bag (blood_bag_id, rh, used, blood_donor_id) VALUES ({blood_bag_id}, '{rh}', B'{used}', {blood_donor_id})"
+         insert_command = f"INSERT INTO Blood_Bag (bag_id, rh, used, blood_donor_id) VALUES ({blood_bag_id}, '{rh}', B'{used}', {blood_donor_id})"
          cursor.execute(insert_command)
 
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Add Blood Bag Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_blood_bag_table()
@@ -694,7 +751,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Remove Blood Bag Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_blood_bag_table()
@@ -729,7 +787,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.blood_bag_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
-         print(e)
+         self.report_error("Update Blood Bag Failure", str(e))
+         self.__conn.rollback()
          return False
 
       return True
@@ -758,7 +817,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Add Organ Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_organ_table()
@@ -785,7 +845,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Remove Organ Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_organ_table()
@@ -817,12 +878,13 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.organ_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
             self.organ_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
             self.organ_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
-            self.organ_table.setItem(idx,5,QtWidgets.QTableWidgetItem(str(data[5])))
+            self.organ_table.setItem(idx,5,QtWidgets.QTableWidgetItem(str(data[5]))) # TODO: Add organ_donor_id to UI File in Table
 
          self.organ_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
-         print(e)
+         self.report_error("Update Organ Failure", str(e))
+         self.__conn.rollback()
          return False
 
       return True
@@ -846,17 +908,18 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
          cursor = self.__conn.cursor()
 
-         insert_command1 = f"INSERT INTO Transplant (tp_id, organ, status, organ_donor_id, patient_id, hospital_id) VALUES ({transplant_id}, '{organ}', {status}, {organ_donor_id}, {patient_id}, {hospital_id})"
+         insert_command1 = f"INSERT INTO Transplant (tp_id, organ, status, organ_donor_id, patient_id, hospital_id) VALUES ({transplant_id}, '{organ}', '{status}', {organ_donor_id}, {patient_id}, {hospital_id})"
          cursor.execute(insert_command1)
 
          for doctor in doctor_ids:
-            insert_command2 = f"INSERT INTO TP_Operates (tp_id, doctor_id) VALUES ({transplant_id}, {doctor}"
+            insert_command2 = f"INSERT INTO TP_Operates (tp_id, doctor_id) VALUES ({transplant_id}, {int(doctor)})"
             cursor.execute(insert_command2)
 
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Add Transplant Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_transplant_table()
@@ -886,7 +949,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Remove Transplant Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_transplant_table()
@@ -924,14 +988,15 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.__conn.commit()
             doctor_ids = []
             for doctor in cursor.fetchall():
-               doctor_ids.append(doctor[0])
+               doctor_ids.append(str(doctor[0]))
             doctor_ids = ", ".join(doctor_ids)
             self.transplant_table.setItem(idx,6,QtWidgets.QTableWidgetItem(doctor_ids))
 
          self.transplant_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
-         print(e)
+         self.report_error("Update Transplant Failure", str(e))
+         self.__conn.rollback()
          return False
 
       return True
@@ -960,7 +1025,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Add Transfusion Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_transfusion_table()
@@ -987,7 +1053,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.__conn.commit()
 
       except Exception as e:
-         print(e)
+         self.report_error("Remove Transfusion Failure", str(e))
+         self.__conn.rollback()
          return False
 
       self.update_transfusion_table()
@@ -1024,7 +1091,387 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          self.transfusion_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
       except Exception as e:
-         print(e)
+         self.report_error("Update Transfusion Failure", str(e))
+         self.__conn.rollback()
+         return False
+
+      return True
+
+   # --Organ Donor List View---------------------------------------------
+
+   def get_available_organ_donor_regions(self):
+      """
+      This method returns a list of the available regions from the Organ Donor table
+      """
+      available_regions_list = []
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         select_regions_command = """SELECT DISTINCT region FROM Organ_Donor"""
+         cursor.execute(select_regions_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         for region in rows:
+            available_regions_list.append(region[0])
+
+      except Exception as e:
+         self.report_error("Get Available Organ Donor Regions Failure", str(e))
+         self.__conn.rollback()
+
+      return available_regions_list
+
+
+   def get_available_organ_donor_organs(self):
+      """
+      This method returns a list of the available organs from the Organ Donor table
+      """
+      available_organs_list = []
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         select_regions_command = """SELECT DISTINCT organ_name FROM Organ_Donor"""
+         cursor.execute(select_regions_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         for organ in rows:
+            available_organs_list.append(organ[0])
+
+      except Exception as e:
+         self.report_error("Get Available Organs Failure", str(e))
+         self.__conn.rollback()
+
+      return available_organs_list
+
+
+   def update_organ_donor_list_view(self):
+      """
+      This method updates the selection options for the for the Organ Donor List View
+      """
+      available_regions_list = self.get_available_organ_donor_regions()
+      available_organs_list = self.get_available_organ_donor_organs()
+
+      self.organ_region_combo_box.clear()
+      for region in available_regions_list:
+         self.organ_region_combo_box.addItem(region)
+
+      self.organ_type_combo_box.clear()
+      for organ in available_organs_list:
+         self.organ_type_combo_box.addItem(organ)
+
+
+   def enter_organ_donor_list_options(self):
+      """
+      This method updates the Organ Donor List and Recommended Doctors tables based on the currently
+      selected options.
+      """
+
+      region = self.organ_region_combo_box.currentText()
+      organ = self.organ_type_combo_box.currentText()
+
+      try:
+         cursor = self.__conn.cursor()
+
+         select_donors_command = f"SELECT organ_donor_id, name FROM Organ_Donor where region = '{region}' AND organ_name = '{organ}'"
+         cursor.execute(select_donors_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         self.organ_donors_table.setRowCount(0)
+
+         for data in rows:
+            idx = rows.index(data)
+            self.organ_donors_table.insertRow(idx)
+            self.organ_donors_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+            self.organ_donors_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+
+         self.organ_donors_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+         select_doctors_command = f"SELECT doctor_id, name FROM Doctor where specialization = '{organ}'"
+         cursor.execute(select_doctors_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         self.recommended_doctors_table.setRowCount(0)
+
+         for data in rows:
+            idx = rows.index(data)
+            self.recommended_doctors_table.insertRow(idx)
+            self.recommended_doctors_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+            self.recommended_doctors_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+
+         self.recommended_doctors_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+      except Exception as e:
+         self.report_error("Get Organ Donors Failure", str(e))
+         self.__conn.rollback()
+         return False
+
+      return True
+
+
+   # --Blood Donor List View---------------------------------------------
+
+   def get_available_blood_donor_regions(self):
+      """
+      This method returns a list of the available regions from the Organ Donor table
+      """
+      available_regions_list = []
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         select_regions_command = """SELECT DISTINCT region FROM Blood_Donor"""
+         cursor.execute(select_regions_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         for region in rows:
+            available_regions_list.append(region[0])
+
+      except Exception as e:
+         self.report_error("Get Available Blood Donor Regions Failure", str(e))
+         self.__conn.rollback()
+
+      return available_regions_list
+
+
+   def get_available_blood_donor_blood_types(self):
+      """
+      This method returns a list of the available blood types from the Blood Donor table
+      """
+      available_blood_types_list = []
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         select_regions_command = """SELECT DISTINCT blood_type FROM Blood_Donor"""
+         cursor.execute(select_regions_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         for organ in rows:
+            available_blood_types_list.append(organ[0])
+
+      except Exception as e:
+         self.report_error("Get Available Blood Types Failure", str(e))
+         self.__conn.rollback()
+
+      return available_blood_types_list
+
+
+   def get_available_blood_donor_age_groups(self):
+      """
+      This method returns a list of the available Age Groups from the Blood Donor table
+      """
+      available_age_groups_list = []
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         select_regions_command = """SELECT DISTINCT age FROM Blood_Donor"""
+         cursor.execute(select_regions_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         for age in rows:
+            available_age_groups_list.append(str(age[0]))
+
+      except Exception as e:
+         self.report_error("Get Available Blood Donor Age Groups Failure", str(e))
+         self.__conn.rollback()
+
+      return available_age_groups_list
+
+
+   def update_blood_donor_list_view(self):
+      """
+      This method updates the selection options for the for the Blood Donor List View
+      """
+      available_regions_list = self.get_available_blood_donor_regions()
+      available_blood_types_list = self.get_available_blood_donor_blood_types()
+      available_availabilities_list = ['Available', 'Not Available']
+      available_age_groups_list = self.get_available_blood_donor_age_groups()
+
+      self.blood_region_combo_box.clear()
+      for region in available_regions_list:
+         self.blood_region_combo_box.addItem(region)
+
+      self.blood_type_combo_box.clear()
+      for blood_type in available_blood_types_list:
+         self.blood_type_combo_box.addItem(blood_type)
+
+      self.blood_availability_combo_box.clear()
+      for availability in available_availabilities_list:
+         self.blood_availability_combo_box.addItem(availability)
+
+      self.blood_age_group_combo_box.clear()
+      for age in available_age_groups_list:
+         self.blood_age_group_combo_box.addItem(age)
+
+
+   def enter_blood_donor_list_options(self):
+      """
+      This method updates the Organ Donor List and Recommended Doctors tables based on the currently
+      selected options.
+      """
+      region = self.organ_region_combo_box.currentText()
+      blood_type = self.blood_type_combo_box.currentText()
+      age_group = int(self.blood_age_group_combo_box.currentText())
+
+      availability_date = datetime.datetime.today() - datetime.timedelta(days=56)
+      availability_date = availability_date.strftime('%Y-%m-%d')
+
+      if self.blood_availability_combo_box.currentText() == 'Available':
+         availability_comparison = f"last_donation <= '{availability_date}'::date"
+      else:
+         availability_comparison = f"last_donation > date'{availability_date}'::date"
+
+      try:
+         cursor = self.__conn.cursor()
+
+         select_donors_command = f"SELECT blood_donor_id, name FROM Blood_Donor where region = '{region}' AND blood_type = '{blood_type}' AND {availability_comparison} AND age = {age_group}"
+         cursor.execute(select_donors_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         self.blood_donors_table.setRowCount(0)
+
+         for data in rows:
+            idx = rows.index(data)
+            self.blood_donors_table.insertRow(idx)
+            self.blood_donors_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+            self.blood_donors_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+
+         self.blood_donors_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+      except Exception as e:
+         self.report_error("Enter Blood Donor List Options Failure", str(e))
+         self.__conn.rollback()
+         return False
+
+      return True
+
+
+   # --Donor Match List View---------------------------------------------
+
+   def update_donor_match_list_view(self):
+      """
+      This method updates the selection options for the for the Donor Match List View
+      """
+      try:
+         cursor = self.__conn.cursor()
+
+         select_patients_command = f"SELECT patient_id, name, blood_type, region, need FROM Patient"
+         cursor.execute(select_patients_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         self.patients_table.setRowCount(0)
+
+         for data in rows:
+            idx = rows.index(data)
+            self.patients_table.insertRow(idx)
+            self.patients_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+            self.patients_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+            self.patients_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
+            self.patients_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
+            self.patients_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
+
+         self.patients_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+      except Exception as e:
+         self.report_error("Enter Blood Donor List Options Failure", str(e))
+         self.__conn.rollback()
+         return False
+
+      return True
+
+
+   def enter_donor_match_list_options(self):
+      """
+      This method updates the Organ Donor List and Recommended Doctors tables based on the currently
+      selected options.
+      """
+      patient = self.patients_table.currentRow()
+
+      blood_type = self.patients_table.item(patient, 2).text()
+      region = self.patients_table.item(patient, 3).text()
+      need = self.patients_table.item(patient, 4).text()
+
+      try:
+         cursor = self.__conn.cursor()
+         self.matching_donors_table.setRowCount(0)
+
+         if need == 'blood':
+            if blood_type in ['AB+', 'AB-']:
+               select_donors_command = f"SELECT blood_donor_id, name, blood_type, region FROM Blood_Donor where region = '{region}'"
+            else:
+               select_donors_command = f"SELECT blood_donor_id, name, blood_type, region FROM Blood_Donor where region = '{region}' AND blood_type IN ('O+', 'O-', '{blood_type}')"
+
+            cursor.execute(select_donors_command)
+            self.__conn.commit()
+            rows = cursor.fetchall()
+
+            for data in rows:
+               idx = rows.index(data)
+               self.matching_donors_table.insertRow(idx)
+               self.matching_donors_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+               self.matching_donors_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+               self.matching_donors_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
+               self.matching_donors_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
+               self.matching_donors_table.setItem(idx,4,QtWidgets.QTableWidgetItem('N/A'))
+               
+         else:
+            if blood_type in ['AB+', 'AB-']:
+               select_donors_command = f"SELECT organ_donor_id, name, blood_type, region, organ_name FROM Organ_Donor where region = '{region}' AND organ_name = '{need}'"
+            else:
+               select_donors_command = f"SELECT organ_donor_id, name, blood_type, region, organ_name FROM Organ_Donor where region = '{region}' AND blood_type IN ('O+', 'O-', '{blood_type}') AND organ_name = '{need}'"
+
+            cursor.execute(select_donors_command)
+            self.__conn.commit()
+            rows = cursor.fetchall()
+
+            for data in rows:
+               idx = rows.index(data)
+               self.matching_donors_table.insertRow(idx)
+               self.matching_donors_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+               self.matching_donors_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+               self.matching_donors_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
+               self.matching_donors_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
+               self.matching_donors_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
+
+         self.matching_donors_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+      except Exception as e:
+         self.report_error("Enter Donor Match List Options Failure", str(e))
+         self.__conn.rollback()
          return False
 
       return True

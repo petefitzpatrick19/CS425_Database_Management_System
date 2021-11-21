@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_BloodOrganDatabaseManagerMainWindow(object):
     def setupUi(self, BloodOrganDatabaseManagerMainWindow):
         BloodOrganDatabaseManagerMainWindow.setObjectName("BloodOrganDatabaseManagerMainWindow")
-        BloodOrganDatabaseManagerMainWindow.resize(972, 829)
+        BloodOrganDatabaseManagerMainWindow.resize(1252, 855)
         self.centralwidget = QtWidgets.QWidget(BloodOrganDatabaseManagerMainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -64,7 +64,7 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.hospital_table.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         self.hospital_table.setHorizontalHeaderItem(3, item)
-        self.hospital_table.horizontalHeader().setVisible(True)
+        self.hospital_table.horizontalHeader().setVisible(False)
         self.hospital_table.horizontalHeader().setCascadingSectionResizes(False)
         self.hospital_table.horizontalHeader().setSortIndicatorShown(False)
         self.hospital_table.horizontalHeader().setStretchLastSection(False)
@@ -242,46 +242,6 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.add_patient_widget.setObjectName("add_patient_widget")
         self.gridLayout_27 = QtWidgets.QGridLayout(self.add_patient_widget)
         self.gridLayout_27.setObjectName("gridLayout_27")
-        self.patient_name_line_edit = QtWidgets.QLineEdit(self.add_patient_widget)
-        self.patient_name_line_edit.setObjectName("patient_name_line_edit")
-        self.gridLayout_27.addWidget(self.patient_name_line_edit, 2, 1, 1, 1)
-        self.add_patient_lbl = QtWidgets.QLabel(self.add_patient_widget)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.add_patient_lbl.setFont(font)
-        self.add_patient_lbl.setObjectName("add_patient_lbl")
-        self.gridLayout_27.addWidget(self.add_patient_lbl, 0, 0, 1, 2)
-        self.patient_name_lbl = QtWidgets.QLabel(self.add_patient_widget)
-        self.patient_name_lbl.setObjectName("patient_name_lbl")
-        self.gridLayout_27.addWidget(self.patient_name_lbl, 2, 0, 1, 1)
-        self.patient_need_line_edit = QtWidgets.QLineEdit(self.add_patient_widget)
-        self.patient_need_line_edit.setObjectName("patient_need_line_edit")
-        self.gridLayout_27.addWidget(self.patient_need_line_edit, 5, 1, 1, 1)
-        self.patient_id_lbl = QtWidgets.QLabel(self.add_patient_widget)
-        self.patient_id_lbl.setObjectName("patient_id_lbl")
-        self.gridLayout_27.addWidget(self.patient_id_lbl, 1, 0, 1, 1)
-        self.patient_age_spin_box = QtWidgets.QSpinBox(self.add_patient_widget)
-        self.patient_age_spin_box.setMaximum(2147483647)
-        self.patient_age_spin_box.setObjectName("patient_age_spin_box")
-        self.gridLayout_27.addWidget(self.patient_age_spin_box, 3, 1, 1, 1)
-        self.patient_need_lbl = QtWidgets.QLabel(self.add_patient_widget)
-        self.patient_need_lbl.setObjectName("patient_need_lbl")
-        self.gridLayout_27.addWidget(self.patient_need_lbl, 5, 0, 1, 1)
-        self.patient_age_lbl = QtWidgets.QLabel(self.add_patient_widget)
-        self.patient_age_lbl.setObjectName("patient_age_lbl")
-        self.gridLayout_27.addWidget(self.patient_age_lbl, 3, 0, 1, 1)
-        self.patient_blood_type_lbl = QtWidgets.QLabel(self.add_patient_widget)
-        self.patient_blood_type_lbl.setObjectName("patient_blood_type_lbl")
-        self.gridLayout_27.addWidget(self.patient_blood_type_lbl, 4, 0, 1, 1)
-        self.patient_id_spin_box = QtWidgets.QSpinBox(self.add_patient_widget)
-        self.patient_id_spin_box.setMaximum(2147483647)
-        self.patient_id_spin_box.setObjectName("patient_id_spin_box")
-        self.gridLayout_27.addWidget(self.patient_id_spin_box, 1, 1, 1, 1)
-        self.patient_blood_type_line_edit = QtWidgets.QLineEdit(self.add_patient_widget)
-        self.patient_blood_type_line_edit.setObjectName("patient_blood_type_line_edit")
-        self.gridLayout_27.addWidget(self.patient_blood_type_line_edit, 4, 1, 1, 1)
         self.widget_2 = QtWidgets.QWidget(self.add_patient_widget)
         self.widget_2.setObjectName("widget_2")
         self.gridLayout_28 = QtWidgets.QGridLayout(self.widget_2)
@@ -292,7 +252,53 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.gridLayout_28.addWidget(self.add_patient_push_btn, 0, 1, 1, 1)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_28.addItem(spacerItem4, 0, 0, 1, 1)
-        self.gridLayout_27.addWidget(self.widget_2, 6, 1, 1, 1)
+        self.gridLayout_27.addWidget(self.widget_2, 7, 1, 1, 1)
+        self.patient_name_lbl = QtWidgets.QLabel(self.add_patient_widget)
+        self.patient_name_lbl.setObjectName("patient_name_lbl")
+        self.gridLayout_27.addWidget(self.patient_name_lbl, 2, 0, 1, 1)
+        self.patient_need_line_edit = QtWidgets.QLineEdit(self.add_patient_widget)
+        self.patient_need_line_edit.setObjectName("patient_need_line_edit")
+        self.gridLayout_27.addWidget(self.patient_need_line_edit, 5, 1, 1, 1)
+        self.patient_age_spin_box = QtWidgets.QSpinBox(self.add_patient_widget)
+        self.patient_age_spin_box.setMaximum(2147483647)
+        self.patient_age_spin_box.setObjectName("patient_age_spin_box")
+        self.gridLayout_27.addWidget(self.patient_age_spin_box, 3, 1, 1, 1)
+        self.patient_name_line_edit = QtWidgets.QLineEdit(self.add_patient_widget)
+        self.patient_name_line_edit.setObjectName("patient_name_line_edit")
+        self.gridLayout_27.addWidget(self.patient_name_line_edit, 2, 1, 1, 1)
+        self.patient_need_lbl = QtWidgets.QLabel(self.add_patient_widget)
+        self.patient_need_lbl.setObjectName("patient_need_lbl")
+        self.gridLayout_27.addWidget(self.patient_need_lbl, 5, 0, 1, 1)
+        self.patient_id_lbl = QtWidgets.QLabel(self.add_patient_widget)
+        self.patient_id_lbl.setObjectName("patient_id_lbl")
+        self.gridLayout_27.addWidget(self.patient_id_lbl, 1, 0, 1, 1)
+        self.patient_blood_type_line_edit = QtWidgets.QLineEdit(self.add_patient_widget)
+        self.patient_blood_type_line_edit.setObjectName("patient_blood_type_line_edit")
+        self.gridLayout_27.addWidget(self.patient_blood_type_line_edit, 4, 1, 1, 1)
+        self.patient_id_spin_box = QtWidgets.QSpinBox(self.add_patient_widget)
+        self.patient_id_spin_box.setMaximum(2147483647)
+        self.patient_id_spin_box.setObjectName("patient_id_spin_box")
+        self.gridLayout_27.addWidget(self.patient_id_spin_box, 1, 1, 1, 1)
+        self.patient_blood_type_lbl = QtWidgets.QLabel(self.add_patient_widget)
+        self.patient_blood_type_lbl.setObjectName("patient_blood_type_lbl")
+        self.gridLayout_27.addWidget(self.patient_blood_type_lbl, 4, 0, 1, 1)
+        self.add_patient_lbl = QtWidgets.QLabel(self.add_patient_widget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.add_patient_lbl.setFont(font)
+        self.add_patient_lbl.setObjectName("add_patient_lbl")
+        self.gridLayout_27.addWidget(self.add_patient_lbl, 0, 0, 1, 2)
+        self.patient_age_lbl = QtWidgets.QLabel(self.add_patient_widget)
+        self.patient_age_lbl.setObjectName("patient_age_lbl")
+        self.gridLayout_27.addWidget(self.patient_age_lbl, 3, 0, 1, 1)
+        self.patient_region_lbl = QtWidgets.QLabel(self.add_patient_widget)
+        self.patient_region_lbl.setObjectName("patient_region_lbl")
+        self.gridLayout_27.addWidget(self.patient_region_lbl, 6, 0, 1, 1)
+        self.patient_region_line_edit = QtWidgets.QLineEdit(self.add_patient_widget)
+        self.patient_region_line_edit.setObjectName("patient_region_line_edit")
+        self.gridLayout_27.addWidget(self.patient_region_line_edit, 6, 1, 1, 1)
         self.gridLayout_29.addWidget(self.add_patient_widget, 1, 0, 1, 2)
         self.patient_table_widget = QtWidgets.QWidget(self.patient_tab)
         self.patient_table_widget.setObjectName("patient_table_widget")
@@ -317,7 +323,7 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.patient_table.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.patient_table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.patient_table.setObjectName("patient_table")
-        self.patient_table.setColumnCount(5)
+        self.patient_table.setColumnCount(6)
         self.patient_table.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.patient_table.setHorizontalHeaderItem(0, item)
@@ -329,6 +335,8 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.patient_table.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.patient_table.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.patient_table.setHorizontalHeaderItem(5, item)
         self.gridLayout_30.addWidget(self.patient_table, 1, 0, 1, 2)
         self.gridLayout_29.addWidget(self.patient_table_widget, 5, 0, 1, 2)
         self.table_editor_tab.addTab(self.patient_tab, "")
@@ -1099,8 +1107,12 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.gridLayout_4.setObjectName("gridLayout_4")
         self.organ_donors_table = QtWidgets.QTableWidget(self.organ_donors_widget)
         self.organ_donors_table.setObjectName("organ_donors_table")
-        self.organ_donors_table.setColumnCount(0)
+        self.organ_donors_table.setColumnCount(2)
         self.organ_donors_table.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.organ_donors_table.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.organ_donors_table.setHorizontalHeaderItem(1, item)
         self.gridLayout_4.addWidget(self.organ_donors_table, 1, 0, 1, 1)
         self.organ_donors_lbl = QtWidgets.QLabel(self.organ_donors_widget)
         font = QtGui.QFont()
@@ -1117,8 +1129,12 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.gridLayout_5.setObjectName("gridLayout_5")
         self.recommended_doctors_table = QtWidgets.QTableWidget(self.recommended_doctors_widget)
         self.recommended_doctors_table.setObjectName("recommended_doctors_table")
-        self.recommended_doctors_table.setColumnCount(0)
+        self.recommended_doctors_table.setColumnCount(2)
         self.recommended_doctors_table.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.recommended_doctors_table.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.recommended_doctors_table.setHorizontalHeaderItem(1, item)
         self.gridLayout_5.addWidget(self.recommended_doctors_table, 1, 0, 1, 1)
         self.recommended_doctors_lbl = QtWidgets.QLabel(self.recommended_doctors_widget)
         font = QtGui.QFont()
@@ -1196,10 +1212,10 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.blood_type_lbl.setFont(font)
         self.blood_type_lbl.setObjectName("blood_type_lbl")
         self.gridLayout_7.addWidget(self.blood_type_lbl, 0, 2, 1, 1)
-        self.pushButton_2 = QtWidgets.QPushButton(self.blood_options_widget)
-        self.pushButton_2.setMaximumSize(QtCore.QSize(80, 16777215))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout_7.addWidget(self.pushButton_2, 1, 5, 1, 1)
+        self.blood_enter_btn = QtWidgets.QPushButton(self.blood_options_widget)
+        self.blood_enter_btn.setMaximumSize(QtCore.QSize(80, 16777215))
+        self.blood_enter_btn.setObjectName("blood_enter_btn")
+        self.gridLayout_7.addWidget(self.blood_enter_btn, 1, 5, 1, 1)
         self.gridLayout_9.addWidget(self.blood_options_widget, 1, 0, 1, 1)
         self.blood_tables_widget = QtWidgets.QWidget(self.blood_donor_list_tab)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
@@ -1220,8 +1236,12 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.gridLayout_8.addWidget(self.blood_donors_lbl, 0, 0, 1, 1)
         self.blood_donors_table = QtWidgets.QTableWidget(self.blood_tables_widget)
         self.blood_donors_table.setObjectName("blood_donors_table")
-        self.blood_donors_table.setColumnCount(0)
+        self.blood_donors_table.setColumnCount(2)
         self.blood_donors_table.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.blood_donors_table.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.blood_donors_table.setHorizontalHeaderItem(1, item)
         self.gridLayout_8.addWidget(self.blood_donors_table, 1, 0, 1, 1)
         self.gridLayout_9.addWidget(self.blood_tables_widget, 2, 0, 1, 1)
         self.tabWidget.addTab(self.blood_donor_list_tab, "")
@@ -1252,12 +1272,29 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         font.setWeight(75)
         self.patients_lbl.setFont(font)
         self.patients_lbl.setObjectName("patients_lbl")
-        self.gridLayout_10.addWidget(self.patients_lbl, 0, 0, 1, 1)
+        self.gridLayout_10.addWidget(self.patients_lbl, 1, 0, 1, 1)
         self.patients_table = QtWidgets.QTableWidget(self.patients_widget)
+        self.patients_table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.patients_table.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.patients_table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.patients_table.setObjectName("patients_table")
-        self.patients_table.setColumnCount(0)
+        self.patients_table.setColumnCount(5)
         self.patients_table.setRowCount(0)
-        self.gridLayout_10.addWidget(self.patients_table, 1, 0, 1, 1)
+        item = QtWidgets.QTableWidgetItem()
+        self.patients_table.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.patients_table.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.patients_table.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.patients_table.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.patients_table.setHorizontalHeaderItem(4, item)
+        self.gridLayout_10.addWidget(self.patients_table, 2, 0, 1, 1)
+        self.donor_match_enter_btn = QtWidgets.QPushButton(self.patients_widget)
+        self.donor_match_enter_btn.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.donor_match_enter_btn.setObjectName("donor_match_enter_btn")
+        self.gridLayout_10.addWidget(self.donor_match_enter_btn, 3, 0, 1, 1)
         self.matching_donors_widget = QtWidgets.QWidget(self.splitter_2)
         self.matching_donors_widget.setObjectName("matching_donors_widget")
         self.gridLayout_11 = QtWidgets.QGridLayout(self.matching_donors_widget)
@@ -1273,10 +1310,20 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.gridLayout_11.addWidget(self.matching_donors_lbl, 0, 0, 1, 1)
         self.matching_donors_table = QtWidgets.QTableWidget(self.matching_donors_widget)
         self.matching_donors_table.setObjectName("matching_donors_table")
-        self.matching_donors_table.setColumnCount(0)
+        self.matching_donors_table.setColumnCount(5)
         self.matching_donors_table.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.matching_donors_table.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.matching_donors_table.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.matching_donors_table.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.matching_donors_table.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.matching_donors_table.setHorizontalHeaderItem(4, item)
         self.gridLayout_11.addWidget(self.matching_donors_table, 1, 0, 1, 1)
-        self.gridLayout_12.addWidget(self.splitter_2, 0, 0, 1, 1)
+        self.gridLayout_12.addWidget(self.splitter_2, 1, 0, 1, 1)
         self.gridLayout_13.addWidget(self.donor_match_widget, 1, 0, 1, 1)
         self.tabWidget.addTab(self.donor_match_list_tab, "")
         self.income_report_tab = QtWidgets.QWidget()
@@ -1336,7 +1383,7 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
         BloodOrganDatabaseManagerMainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(BloodOrganDatabaseManagerMainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 972, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1252, 22))
         self.menubar.setObjectName("menubar")
         BloodOrganDatabaseManagerMainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(BloodOrganDatabaseManagerMainWindow)
@@ -1344,8 +1391,8 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         BloodOrganDatabaseManagerMainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(BloodOrganDatabaseManagerMainWindow)
-        self.tabWidget.setCurrentIndex(0)
-        self.table_editor_tab.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
+        self.table_editor_tab.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(BloodOrganDatabaseManagerMainWindow)
 
     def retranslateUi(self, BloodOrganDatabaseManagerMainWindow):
@@ -1388,13 +1435,14 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Fee"))
         self.doctor_table_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Doctor Table:"))
         self.table_editor_tab.setTabText(self.table_editor_tab.indexOf(self.doctor_tab), _translate("BloodOrganDatabaseManagerMainWindow", "Doctor"))
-        self.add_patient_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Add Patient:"))
-        self.patient_name_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Name:"))
-        self.patient_id_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Patient ID:"))
-        self.patient_need_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Need:"))
-        self.patient_age_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Age:"))
-        self.patient_blood_type_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Blood Type:"))
         self.add_patient_push_btn.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Add"))
+        self.patient_name_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Name:"))
+        self.patient_need_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Need:"))
+        self.patient_id_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Patient ID:"))
+        self.patient_blood_type_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Blood Type:"))
+        self.add_patient_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Add Patient:"))
+        self.patient_age_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Age:"))
+        self.patient_region_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Region:"))
         self.patient_table_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Patient Table:"))
         self.remove_patient_push_btn.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Remove Selected Row"))
         item = self.patient_table.horizontalHeaderItem(0)
@@ -1407,6 +1455,8 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Blood Type"))
         item = self.patient_table.horizontalHeaderItem(4)
         item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Need"))
+        item = self.patient_table.horizontalHeaderItem(5)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Region"))
         self.table_editor_tab.setTabText(self.table_editor_tab.indexOf(self.patient_tab), _translate("BloodOrganDatabaseManagerMainWindow", "Patient"))
         self.organ_donor_id_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Organ Donor ID"))
         self.add_organ_donor_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Add Organ Donor:"))
@@ -1579,68 +1629,103 @@ class Ui_BloodOrganDatabaseManagerMainWindow(object):
         self.organ_region_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Region:"))
         self.organ_type_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Organ Type:"))
         self.organ_enter_btn.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Enter"))
+        item = self.organ_donors_table.horizontalHeaderItem(0)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Organ Donor ID"))
+        item = self.organ_donors_table.horizontalHeaderItem(1)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Name"))
         self.organ_donors_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Organ Donors:"))
+        item = self.recommended_doctors_table.horizontalHeaderItem(0)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Doctor ID"))
+        item = self.recommended_doctors_table.horizontalHeaderItem(1)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Name"))
         self.recommended_doctors_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Recommended Doctors:"))
         self.organ_info_txt_browser.setHtml(_translate("BloodOrganDatabaseManagerMainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Welcome to the Organ Donor List.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8.25pt;\">Please Select your preferred &quot;Region&quot; and &quot;Organ Type&quot; from the drop down menus and press &quot;Enter&quot;.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8.25pt;\">The &quot;Organ Donors&quot; table will be populated with all organ donors matching the chosen parameters.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8.25pt;\">The &quot;Recommended Doctors&quot; table will be populated with all doctors whose specialty matches the selected &quot;Organ Type&quot;.</span></p></body></html>"))
+"</style></head><body style=\" font-family:\'.SF NS Text\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\">Welcome to the Organ Donor List.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">Please Select your preferred &quot;Region&quot; and &quot;Organ Type&quot; from the drop down menus and press &quot;Enter&quot;.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">The &quot;Organ Donors&quot; table will be populated with all organ donors matching the chosen parameters.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">The &quot;Recommended Doctors&quot; table will be populated with all doctors whose specialty matches the selected &quot;Organ Type&quot;.</span></p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.organ_donor_list_tab), _translate("BloodOrganDatabaseManagerMainWindow", "Organ Donor List"))
         self.blood_info_txt_browser.setHtml(_translate("BloodOrganDatabaseManagerMainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Welcome to the Blood Donor List.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8.25pt;\">Please Select your preferred &quot;Region&quot;, &quot;Blood Type&quot;, &quot;Availability&quot;, and &quot;Age Group&quot; from the drop down menus and press &quot;Enter&quot;.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8.25pt;\">The &quot;Blood Donors&quot; table will be populated with all blood donors matching the chosen parameters.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'.SF NS Text\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\">Welcome to the Blood Donor List.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">Please Select your preferred &quot;Region&quot;, &quot;Blood Type&quot;, &quot;Availability&quot;, and &quot;Age Group&quot; from the drop down menus and press &quot;Enter&quot;.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">The &quot;Blood Donors&quot; table will be populated with all blood donors matching the chosen parameters.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">NOTE: For a Blood Donor to be available, they must not have donated blood for the last 56 days.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.blood_availability_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Availability:"))
         self.blood_age_group_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Age Group:"))
         self.blood_region_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Region:"))
-        self.blood_type_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "BloodType:"))
-        self.pushButton_2.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Enter"))
+        self.blood_type_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Blood Type:"))
+        self.blood_enter_btn.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Enter"))
         self.blood_donors_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Blood Donors:"))
+        item = self.blood_donors_table.horizontalHeaderItem(0)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Blood Donor ID"))
+        item = self.blood_donors_table.horizontalHeaderItem(1)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Name"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.blood_donor_list_tab), _translate("BloodOrganDatabaseManagerMainWindow", "Blood Donor List"))
         self.donor_match_info_txt_browser.setHtml(_translate("BloodOrganDatabaseManagerMainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Welcome to the Donor Match List.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8.25pt;\">Please select a Patient row from the &quot;Patients&quot; table.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8.25pt;\">The &quot;Matching Donors&quot; table will be populated donors who match the blood type, organ type (when applicable), and the region of the selected Patient.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'.SF NS Text\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\">Welcome to the Donor Match List.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">Please select a Patient row from the &quot;Patients&quot; table band click the &quot;Find Matching Donors For Selected Patient&quot; button below it.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">The &quot;Matching Donors&quot; table will be populated donors who match the blood type, organ type (when applicable), and the region of the selected Patient.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.patients_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Patients:"))
+        item = self.patients_table.horizontalHeaderItem(0)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Patient ID"))
+        item = self.patients_table.horizontalHeaderItem(1)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Name"))
+        item = self.patients_table.horizontalHeaderItem(2)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Blood Type"))
+        item = self.patients_table.horizontalHeaderItem(3)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Region"))
+        item = self.patients_table.horizontalHeaderItem(4)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Need"))
+        self.donor_match_enter_btn.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Find Matching Donors For Selected Patient"))
         self.matching_donors_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Matching Donors:"))
+        item = self.matching_donors_table.horizontalHeaderItem(0)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Donor ID"))
+        item = self.matching_donors_table.horizontalHeaderItem(1)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Name"))
+        item = self.matching_donors_table.horizontalHeaderItem(2)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Blood Type"))
+        item = self.matching_donors_table.horizontalHeaderItem(3)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Region"))
+        item = self.matching_donors_table.horizontalHeaderItem(4)
+        item.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Organ Name"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.donor_match_list_tab), _translate("BloodOrganDatabaseManagerMainWindow", "Donor Match List"))
         self.income_report_info_txt_browser.setHtml(_translate("BloodOrganDatabaseManagerMainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Welcome to the Income Report Page.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8.25pt;\">The &quot;Income Report&quot; table displays the total income for each hospital from transplants.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'.SF NS Text\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\">Welcome to the Income Report Page.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">The &quot;Income Report&quot; table displays the total income for each hospital from transplants.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.income_report_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Income Report:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.income_report_tab), _translate("BloodOrganDatabaseManagerMainWindow", "Income Report"))
         self.operations_report_info_txt_browser.setHtml(_translate("BloodOrganDatabaseManagerMainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Welcome to the Operations Report Page.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8.25pt;\">The &quot;Operations Report&quot; table displays the Doctor\'s Name grouped by Region along with the Number ofOoperations sorted from the highest to lowest Number of Operations.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'.SF NS Text\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\">Welcome to the Operations Report Page.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:12pt; font-weight:600;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\">The &quot;Operations Report&quot; table displays the Doctor\'s Name grouped by Region along with the Number ofOoperations sorted from the highest to lowest Number of Operations.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:8.25pt;\"><br /></p></body></html>"))
         self.operations_report_lbl.setText(_translate("BloodOrganDatabaseManagerMainWindow", "Operations Report:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.operation_report_tab), _translate("BloodOrganDatabaseManagerMainWindow", "Operations Report"))
 

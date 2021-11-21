@@ -3,4 +3,4 @@ CREDENTIALS_MAP_PASS_KEY = "pass"
 
 DB_NAME = "blood_donation"
 DB_HOST = "localhost"
-DB_PORT = "5432"
+DB_PORT = "5431"
