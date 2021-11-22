@@ -60,6 +60,10 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
       self.donor_match_enter_btn.clicked.connect(self.enter_donor_match_list_options)
 
+      self.update_income_report_push_btn.clicked.connect(self.on_income_report_push_btn_clicked)
+
+      self.update_operations_report_push_btn.clicked.connect(self.on_operations_report_push_btn_clicked)
+
       # -----------------------------------------------------------------
 
       self.update_hospital_table()
@@ -75,6 +79,8 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       self.update_organ_donor_list_view()
       self.update_blood_donor_list_view()
       self.update_donor_match_list_view()
+      self.update_income_report_view()
+      self.update_operations_report_view()
 
 
    def report_error(self, title, msg):
@@ -194,12 +200,13 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       age = self.doctor_age_spin_box.text()
       specialization = self.doctor_specialization_line_edit.text()
       fee = self.doctor_fee_spin_box.text()
+      region = self.doctor_region_line_edit.text()
 
       try:
 
          cursor = self.__conn.cursor()
 
-         insert_command = f"INSERT INTO Doctor (doctor_id, name, age, specialization, fee) VALUES ({doctor_id}, '{name}', {age}, '{specialization}', {fee})"
+         insert_command = f"INSERT INTO Doctor (doctor_id, name, age, specialization, fee, region) VALUES ({doctor_id}, '{name}', {age}, '{specialization}', {fee}, '{region}')"
 
          cursor.execute(insert_command)
 
@@ -269,6 +276,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.doctor_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
             self.doctor_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
             self.doctor_table.setItem(idx,4,QtWidgets.QTableWidgetItem(str(data[4])))
+            self.doctor_table.setItem(idx,5,QtWidgets.QTableWidgetItem(str(data[5])))
 
          self.doctor_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
@@ -1019,7 +1027,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
          cursor = self.__conn.cursor()
 
-         insert_command = f"INSERT INTO Transfusion (tf_id, organ, status, organ_donor_id, patient_id, hospital_id) VALUES ({transfusion_id}, '{status}', {blood_donor_id}, {doctor_id}, {patient_id}, {hospital_id})"
+         insert_command = f"INSERT INTO Transfusion (tf_id, status, blood_donor_id, doctor_id, patient_id, hospital_id) VALUES ({transfusion_id}, '{status}', {blood_donor_id}, {doctor_id}, {patient_id}, {hospital_id})"
          cursor.execute(insert_command)
 
          self.__conn.commit()
@@ -1377,7 +1385,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       return True
 
 
-   # --Donor Match List View---------------------------------------------
+   # --Donor Match List View-------------------------------------------
 
    def update_donor_match_list_view(self):
       """
@@ -1447,7 +1455,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
                self.matching_donors_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
                self.matching_donors_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
                self.matching_donors_table.setItem(idx,4,QtWidgets.QTableWidgetItem('N/A'))
-               
+
          else:
             if blood_type in ['AB+', 'AB-']:
                select_donors_command = f"SELECT organ_donor_id, name, blood_type, region, organ_name FROM Organ_Donor where region = '{region}' AND organ_name = '{need}'"
@@ -1475,3 +1483,92 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
          return False
 
       return True
+
+   # --Income Report View----------------------------------------------
+
+   def update_income_report_view(self):
+      """
+      This method updates the Income Report View which displays the total income for each hospital from transplants.
+      """
+      try:
+         cursor = self.__conn.cursor()
+
+         select_incomes_command = f"SELECT Hospital.hospital_id, Hospital.name, SUM(cost) FROM Transplant INNER JOIN Hospital ON Transplant.hospital_id = Hospital.hospital_id GROUP BY Hospital.hospital_id"
+         cursor.execute(select_incomes_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         self.income_report_table.setRowCount(0)
+
+         for data in rows:
+            idx = rows.index(data)
+            self.income_report_table.insertRow(idx)
+            self.income_report_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+            self.income_report_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+            self.income_report_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
+
+         self.income_report_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+      except Exception as e:
+         self.report_error("Update Income Report Failure", str(e))
+         self.__conn.rollback()
+         return False
+
+      return True
+
+
+   def on_income_report_push_btn_clicked(self):
+      """
+      This method is a slot that triggers the update_income_report function when the update_income_report_push_btn is clicked.
+      """
+      self.update_income_report_view()
+
+   # --Operations Report View----------------------------------------------
+
+   def update_operations_report_view(self):
+      """
+      This method updates the Income Operations Report View which displays the Doctor's Name grouped by Region along with the 
+      Number of Operations sorted from the highest to lowest Number of Operations.
+      """
+      try:
+         cursor = self.__conn.cursor()
+
+         select_operations_command = """SELECT Doctor.doctor_id, Doctor.name, Doctor.region, COUNT(*)
+                                        FROM Transplant JOIN Tp_Operates ON Transplant.tp_id = Tp_Operates.tp_id 
+                                        JOIN Doctor ON Doctor.doctor_id = Tp_Operates.doctor_id 
+                                        GROUP BY Doctor.doctor_id
+                                        ORDER BY region ASC, count DESC"""
+                                        
+         cursor.execute(select_operations_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         self.operations_report_table.setRowCount(0)
+
+         for data in rows:
+            idx = rows.index(data)
+            self.operations_report_table.insertRow(idx)
+            self.operations_report_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+            self.operations_report_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+            self.operations_report_table.setItem(idx,2,QtWidgets.QTableWidgetItem(str(data[2])))
+            self.operations_report_table.setItem(idx,3,QtWidgets.QTableWidgetItem(str(data[3])))
+
+         self.operations_report_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+      except Exception as e:
+         self.report_error("Update Operations Report Failure", str(e))
+         self.__conn.rollback()
+         return False
+
+      return True
+
+
+   def on_operations_report_push_btn_clicked(self):
+      """
+      This method is a slot that triggers the update_operations_report function when the update_operations_report_push_btn is clicked.
+      """
+      self.update_operations_report_view()
