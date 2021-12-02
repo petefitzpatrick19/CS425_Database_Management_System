@@ -55,27 +55,7 @@
                <property name="topMargin">
                 <number>9</number>
                </property>
-               <item row="2" column="1">
-                <widget class="QPushButton" name="remove_hospital_push_btn">
-                 <property name="text">
-                  <string>Remove Selected Row</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <spacer name="horizontalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="0" colspan="2">
+               <item row="2" column="0" colspan="3">
                 <widget class="QTableWidget" name="hospital_table">
                  <property name="editTriggers">
                   <set>QAbstractItemView::NoEditTriggers</set>
@@ -120,7 +100,7 @@
                  </column>
                 </widget>
                </item>
-               <item row="0" column="0" colspan="2">
+               <item row="1" column="0" colspan="3">
                 <widget class="QLabel" name="hospital_table_lbl">
                  <property name="font">
                   <font>
@@ -133,6 +113,26 @@
                   <string>Hospital Table:</string>
                  </property>
                 </widget>
+               </item>
+               <item row="3" column="2">
+                <widget class="QPushButton" name="remove_hospital_push_btn">
+                 <property name="text">
+                  <string>Remove Selected Row</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </widget>
@@ -196,6 +196,19 @@
                   <property name="bottomMargin">
                    <number>0</number>
                   </property>
+                  <item row="0" column="0">
+                   <spacer name="horizontalSpacer">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
                   <item row="0" column="1">
                    <widget class="QPushButton" name="add_hospital_push_btn">
                     <property name="maximumSize">
@@ -212,18 +225,12 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="0" column="0">
-                   <spacer name="horizontalSpacer">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="update_hospital_table_push_btn">
+                    <property name="text">
+                     <string>Update Table</string>
                     </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -296,6 +303,13 @@
                      </size>
                     </property>
                    </spacer>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="update_doctor_table_push_btn">
+                    <property name="text">
+                     <string>Update Table</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -522,6 +536,13 @@
                      </size>
                     </property>
                    </spacer>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="update_patient_table_push_btn">
+                    <property name="text">
+                     <string>Update Table</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -769,13 +790,6 @@
                   <property name="bottomMargin">
                    <number>0</number>
                   </property>
-                  <item row="0" column="1">
-                   <widget class="QPushButton" name="add_organ_donor_push_btn">
-                    <property name="text">
-                     <string>Add</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="0" column="0">
                    <spacer name="horizontalSpacer_8">
                     <property name="orientation">
@@ -788,6 +802,20 @@
                      </size>
                     </property>
                    </spacer>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QPushButton" name="add_organ_donor_push_btn">
+                    <property name="text">
+                     <string>Add</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="update_organ_donor_table_push_btn">
+                    <property name="text">
+                     <string>Update Table</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -1076,13 +1104,6 @@
                   <property name="bottomMargin">
                    <number>0</number>
                   </property>
-                  <item row="0" column="1">
-                   <widget class="QPushButton" name="add_organ_push_btn">
-                    <property name="text">
-                     <string>Add</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="0" column="0">
                    <spacer name="horizontalSpacer_15">
                     <property name="orientation">
@@ -1095,6 +1116,20 @@
                      </size>
                     </property>
                    </spacer>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QPushButton" name="add_organ_push_btn">
+                    <property name="text">
+                     <string>Add</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="update_organ_table_push_btn">
+                    <property name="text">
+                     <string>Update Table</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -1239,6 +1274,11 @@
                    <string>Used</string>
                   </property>
                  </column>
+                 <column>
+                  <property name="text">
+                   <string>Blood Donor ID</string>
+                  </property>
+                 </column>
                 </widget>
                </item>
               </layout>
@@ -1309,6 +1349,13 @@
                      </size>
                     </property>
                    </spacer>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="update_blood_donor_table_push_btn">
+                    <property name="text">
+                     <string>Update Table</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -1576,13 +1623,6 @@
                   <property name="bottomMargin">
                    <number>0</number>
                   </property>
-                  <item row="0" column="1">
-                   <widget class="QPushButton" name="add_blood_bag_push_btn">
-                    <property name="text">
-                     <string>Add</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="0" column="0">
                    <spacer name="horizontalSpacer_17">
                     <property name="orientation">
@@ -1595,6 +1635,20 @@
                      </size>
                     </property>
                    </spacer>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QPushButton" name="add_blood_bag_push_btn">
+                    <property name="text">
+                     <string>Add</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="update_blood_bag_table_push_btn">
+                    <property name="text">
+                     <string>Update Table</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -1843,13 +1897,6 @@
                   <property name="bottomMargin">
                    <number>0</number>
                   </property>
-                  <item row="0" column="1">
-                   <widget class="QPushButton" name="add_transplant_push_btn">
-                    <property name="text">
-                     <string>Add</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="0" column="0">
                    <spacer name="horizontalSpacer_12">
                     <property name="orientation">
@@ -1862,6 +1909,20 @@
                      </size>
                     </property>
                    </spacer>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QPushButton" name="add_transplant_push_btn">
+                    <property name="text">
+                     <string>Add</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="update_transplant_table_push_btn">
+                    <property name="text">
+                     <string>Update Table</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -2035,13 +2096,6 @@
                   <property name="bottomMargin">
                    <number>0</number>
                   </property>
-                  <item row="0" column="1">
-                   <widget class="QPushButton" name="add_transfusion_push_btn">
-                    <property name="text">
-                     <string>Add</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="0" column="0">
                    <spacer name="horizontalSpacer_14">
                     <property name="orientation">
@@ -2054,6 +2108,20 @@
                      </size>
                     </property>
                    </spacer>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QPushButton" name="add_transfusion_push_btn">
+                    <property name="text">
+                     <string>Add</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="update_transfusion_table_push_btn">
+                    <property name="text">
+                     <string>Update Table</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -2464,45 +2532,8 @@ p, li { white-space: pre-wrap; }
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QComboBox" name="blood_region_combo_box"/>
-           </item>
-           <item row="1" column="2">
-            <widget class="QComboBox" name="blood_type_combo_box"/>
-           </item>
            <item row="1" column="3">
             <widget class="QComboBox" name="blood_availability_combo_box"/>
-           </item>
-           <item row="0" column="4">
-            <widget class="QLabel" name="blood_age_group_lbl">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Age Group:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="4">
-            <widget class="QComboBox" name="blood_age_group_combo_box"/>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="blood_region_lbl">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Region:</string>
-             </property>
-            </widget>
            </item>
            <item row="0" column="2">
             <widget class="QLabel" name="blood_type_lbl">
@@ -2518,6 +2549,34 @@ p, li { white-space: pre-wrap; }
              </property>
             </widget>
            </item>
+           <item row="0" column="4">
+            <widget class="QLabel" name="blood_age_group_lbl">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Age Group:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="blood_region_lbl">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Region:</string>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="5">
             <widget class="QPushButton" name="blood_enter_btn">
              <property name="maximumSize">
@@ -2530,6 +2589,15 @@ p, li { white-space: pre-wrap; }
               <string>Enter</string>
              </property>
             </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QComboBox" name="blood_type_combo_box"/>
+           </item>
+           <item row="1" column="4">
+            <widget class="QComboBox" name="blood_age_group_combo_box"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QComboBox" name="blood_region_combo_box"/>
            </item>
           </layout>
          </widget>
@@ -2907,6 +2975,227 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;The &amp;quot;Operations Report&amp;quot; table displays the Doctor's Name grouped by Region along with the Number of Operations sorted from the highest to lowest Number of Operations.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="add_users_tab">
+       <attribute name="title">
+        <string>Add Users</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_58">
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="main_lbl">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Blood and Organ Donation Management System: Add Users Page</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="login_lbl">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Add User:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="user_lbl">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Username:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="user_line_edit">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="pass_lbl">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Password:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="pass_line_edit">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::ClickFocus</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <widget class="QWidget" name="role_widget" native="true">
+          <layout class="QGridLayout" name="gridLayout_57">
+           <item row="3" column="0">
+            <widget class="QRadioButton" name="patient_role_radio_btn">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Patient</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QRadioButton" name="doctor_role_radio_btn">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Doctor</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="admin_role_radio_btn">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Admin</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="role_lbl">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Role:</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <widget class="QWidget" name="widget_10" native="true">
+          <layout class="QGridLayout" name="gridLayout_55">
+           <item row="1" column="1">
+            <widget class="QPushButton" name="add_user_push_btn">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Add User</string>
+             </property>
+             <property name="shortcut">
+              <string>Return</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <spacer name="horizontalSpacer_21">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="update_users_table_push_btn">
+             <property name="text">
+              <string>Update Table</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="2">
+         <widget class="QWidget" name="operations_report_widget_2" native="true">
+          <layout class="QGridLayout" name="gridLayout_56">
+           <item row="0" column="0">
+            <widget class="QLabel" name="users_table_lbl">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Users Table:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QTableWidget" name="users_table">
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::SingleSelection</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <column>
+              <property name="text">
+               <string>User Name</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Role</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>

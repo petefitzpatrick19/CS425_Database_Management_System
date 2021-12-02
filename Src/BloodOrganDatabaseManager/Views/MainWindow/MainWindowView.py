@@ -29,30 +29,39 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
       self.add_hospital_push_btn.clicked.connect(self.add_hospital)
       self.remove_hospital_push_btn.clicked.connect(self.remove_hospital)
+      self.update_hospital_table_push_btn.clicked.connect(self.update_hospital_table)
 
       self.add_doctor_push_btn.clicked.connect(self.add_doctor)
       self.remove_doctor_push_btn.clicked.connect(self.remove_doctor)
+      self.update_doctor_table_push_btn.clicked.connect(self.update_doctor_table)
 
       self.add_patient_push_btn.clicked.connect(self.add_patient)
       self.remove_patient_push_btn.clicked.connect(self.remove_patient)
+      self.update_patient_table_push_btn.clicked.connect(self.update_patient_table)
 
       self.add_organ_donor_push_btn.clicked.connect(self.add_organ_donor)
       self.remove_organ_donor_push_btn.clicked.connect(self.remove_organ_donor)
+      self.update_organ_donor_table_push_btn.clicked.connect(self.update_organ_donor_table)
 
       self.add_blood_donor_push_btn.clicked.connect(self.add_blood_donor)
       self.remove_blood_donor_push_btn.clicked.connect(self.remove_blood_donor)
+      self.update_blood_donor_table_push_btn.clicked.connect(self.update_blood_donor_table)
 
       self.add_organ_push_btn.clicked.connect(self.add_organ)
       self.remove_organ_push_btn.clicked.connect(self.remove_organ)
+      self.update_organ_table_push_btn.clicked.connect(self.update_organ_table)
 
       self.add_blood_bag_push_btn.clicked.connect(self.add_blood_bag)
       self.remove_blood_bag_push_btn.clicked.connect(self.remove_blood_bag)
+      self.update_blood_bag_table_push_btn.clicked.connect(self.update_blood_bag_table)
 
       self.add_transplant_push_btn.clicked.connect(self.add_transplant)
       self.remove_transplant_push_btn.clicked.connect(self.remove_transplant)
+      self.update_transplant_table_push_btn.clicked.connect(self.update_transplant_table)
 
       self.add_transfusion_push_btn.clicked.connect(self.add_transfusion)
       self.remove_transfusion_push_btn.clicked.connect(self.remove_transfusion)
+      self.update_transfusion_table_push_btn.clicked.connect(self.update_transfusion_table)
 
       self.organ_enter_btn.clicked.connect(self.enter_organ_donor_list_options)
 
@@ -64,23 +73,14 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
       self.update_operations_report_push_btn.clicked.connect(self.on_operations_report_push_btn_clicked)
 
-      # -----------------------------------------------------------------
+      self.add_user_push_btn.clicked.connect(self.add_user)
+      self.update_users_table_push_btn.clicked.connect(self.update_users_table)
 
-      self.update_hospital_table()
-      self.update_doctor_table()
-      self.update_patient_table()
-      self.update_organ_donor_table()
-      self.update_blood_donor_table()
-      self.update_organ_table()
-      self.update_blood_bag_table()
-      self.update_transplant_table()
-      self.update_transfusion_table()
+      # -----------------------------------------------------------------
 
       self.update_organ_donor_list_view()
       self.update_blood_donor_list_view()
       self.update_donor_match_list_view()
-      self.update_income_report_view()
-      self.update_operations_report_view()
 
 
    def report_error(self, title, msg):
@@ -280,6 +280,10 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
          self.doctor_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
+         self.update_organ_donor_list_view()
+         self.update_blood_donor_list_view()
+         self.update_donor_match_list_view()
+
       except Exception as e:
          self.report_error("Update Doctor Failure", str(e))
          self.__conn.rollback()
@@ -378,6 +382,10 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.patient_table.setItem(idx,5,QtWidgets.QTableWidgetItem(str(data[5])))
 
          self.patient_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+         self.update_organ_donor_list_view()
+         self.update_blood_donor_list_view()
+         self.update_donor_match_list_view()
 
       except Exception as e:
          self.report_error("Update Patient Failure", str(e))
@@ -537,6 +545,10 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
             self.organ_donor_table.setItem(idx,10,QtWidgets.QTableWidgetItem(contact_info_list))
 
          self.organ_donor_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+         self.update_organ_donor_list_view()
+         self.update_blood_donor_list_view()
+         self.update_donor_match_list_view()
 
       except Exception as e:
          self.report_error("Update Organ Donor Failure", str(e))
@@ -703,6 +715,10 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
          self.blood_donor_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
+         self.update_organ_donor_list_view()
+         self.update_blood_donor_list_view()
+         self.update_donor_match_list_view()
+
       except Exception as e:
          self.report_error("Update Blood Donor Failure", str(e))
          self.__conn.rollback()
@@ -753,7 +769,7 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
          cursor = self.__conn.cursor()
 
-         delete_command = f"DELETE FROM Blood_Bag WHERE blood_bag_id = {blood_bag_id}"
+         delete_command = f"DELETE FROM Blood_Bag WHERE bag_id = {blood_bag_id}"
          cursor.execute(delete_command)
 
          self.__conn.commit()
@@ -1342,10 +1358,10 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
 
    def enter_blood_donor_list_options(self):
       """
-      This method updates the Organ Donor List and Recommended Doctors tables based on the currently
+      This method updates the Blood Donor List based on the currently
       selected options.
       """
-      region = self.organ_region_combo_box.currentText()
+      region = self.blood_region_combo_box.currentText()
       blood_type = self.blood_type_combo_box.currentText()
       age_group = int(self.blood_age_group_combo_box.currentText())
 
@@ -1429,9 +1445,14 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       """
       patient = self.patients_table.currentRow()
 
-      blood_type = self.patients_table.item(patient, 2).text()
-      region = self.patients_table.item(patient, 3).text()
-      need = self.patients_table.item(patient, 4).text()
+      if self.patients_table.rowCount():
+         blood_type = self.patients_table.item(patient, 2).text()
+         region = self.patients_table.item(patient, 3).text()
+         need = self.patients_table.item(patient, 4).text()
+      else:
+         blood_type = None
+         region = None
+         need = None
 
       try:
          cursor = self.__conn.cursor()
@@ -1572,3 +1593,93 @@ class MainWindowView(QtWidgets.QMainWindow, Ui_BloodOrganDatabaseManagerMainWind
       This method is a slot that triggers the update_operations_report function when the update_operations_report_push_btn is clicked.
       """
       self.update_operations_report_view()
+
+   # --Add Users View------------------------------------------------------
+   
+   def update_users_table(self):
+      """
+      This method updates the users table with the user name and roles.
+      """
+      try:
+         cursor = self.__conn.cursor()
+
+         select_users_command = """ SELECT r.rolname, 
+                                    ARRAY(SELECT b.rolname
+                                          FROM pg_catalog.pg_auth_members m
+                                          JOIN pg_catalog.pg_roles b ON (m.roleid = b.oid)
+                                          WHERE m.member = r.oid) as memberof
+                                    FROM pg_catalog.pg_roles r
+                                    WHERE r.rolname NOT IN ('pg_signal_backend','rds_iam',
+                                                            'rds_replication','rds_superuser',
+                                                            'rdsadmin','rdsrepladmin', 'pg_database_owner',
+                                                            'pg_execute_server_program', 'pg_monitor', 
+                                                            'pg_read_all_data', 'pg_read_all_settings', 
+                                                            'pg_read_all_stats', 'pg_read_server_files',
+                                                            'pg_stat_scan_tables', 'pg_write_all_data',
+                                                            'pg_write_server_files', 'postgres', 'pete',
+                                                            'admin_role', 'doctor_role', 'patient_role')
+                                    ORDER BY 1;"""
+                                        
+         cursor.execute(select_users_command)
+
+         self.__conn.commit()
+
+         rows = cursor.fetchall()
+
+         self.users_table.setRowCount(0)
+
+         for data in rows:
+            idx = rows.index(data)
+            self.users_table.insertRow(idx)
+            self.users_table.setItem(idx,0,QtWidgets.QTableWidgetItem(str(data[0])))
+            self.users_table.setItem(idx,1,QtWidgets.QTableWidgetItem(str(data[1])))
+
+         self.users_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+      except Exception as e:
+         self.report_error("Update User Table Failure", str(e))
+         self.__conn.rollback()
+         return False
+
+      return True
+
+   
+   def add_user(self):
+      """
+      This method is a slot which takes the user inputs and adds a user to the table
+      """
+      username = self.user_line_edit.text()
+      password = self.pass_line_edit.text()
+      
+      role = None
+      if self.admin_role_radio_btn.isChecked():
+         role = 'Admin_Role'
+      elif self.doctor_role_radio_btn.isChecked():
+         role = 'Doctor_Role'
+      elif self.patient_role_radio_btn.isChecked():
+         role = 'Patient_Role'
+
+      try:
+
+         cursor = self.__conn.cursor()
+
+         if role == 'Admin_Role':
+            create_user_command = f"CREATE USER {username} WITH PASSWORD '{password}' CREATEROLE"
+         else:
+            create_user_command = f"CREATE USER {username} WITH PASSWORD '{password}'"
+
+         cursor.execute(create_user_command)
+
+         if role:
+            grant_privilege_command = f"GRANT {role} TO {username}"
+            cursor.execute(grant_privilege_command)
+
+         self.__conn.commit()
+
+      except Exception as e:
+         self.report_error("Add User Failure", str(e))
+         self.__conn.rollback()
+         return False
+
+      self.update_users_table()
+      return True
